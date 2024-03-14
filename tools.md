@@ -1,10 +1,12 @@
 ## Tools 
 ### Batch processing :
   > Airflow
+
   > Google cloud storage
 
 ### Datawarehouse 
   > Local : DuckDB
+
   > Cloud : BigQuery
 
 ### Transformation
@@ -15,4 +17,5 @@
 
 ### Quality of project :
   > Makefile
+
   > CI/CD tool : Concourse
