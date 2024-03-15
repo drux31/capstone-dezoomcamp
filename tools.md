@@ -1,8 +1,11 @@
 ## Tools 
 ### Batch processing :
-  > Airflow
+  > duckDB
 
   > Google cloud storage
+
+### Orchestrator
+  > Apache Airflow
 
 ### Datawarehouse 
   > Local : DuckDB
