@@ -17,8 +17,10 @@ The project is divided in four main parts:
 ### Data extraction
 The dataset we are working with is extracted from the French government open data platform, with a focus on the data produced between 2019 and 2022. The data is extracted with a python script and stored localy in DuckDB (that we are using as a Datawarehouse).
 
-Tools used for this process : 
+**Tools used for this process** : 
+
 &rarr; simple python script for downloading the data ;
+
 &rarr; DuckDB as local datawarehouse where were are storing the dowloaded data (we will create a schema called raw that will contain the conrresponding data).
 
 Architecture :
