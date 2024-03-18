@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 # author : drux31<contact@lnts.me>
-# date : 2024-02-26
+# date : 2024-03-18
 '''
 python for data ingestion/extraction for the project
-- DATASET : https://www.data.gouv.fr/en/datasets/bases-de-donnees-annuelles-des-accidents-corporels-de-la-circulation-routiere-annees-de-2005-a-2022/
+- DATASET : https://www.data.gouv.fr/en/datasets/\
+            bases-de-donnees-annuelles-des-\
+            accidents-corporels-de-la-circulation-\
+            routiere-annees-de-2005-a-2022/
 '''
 import requests
 import os
@@ -15,7 +18,6 @@ def get_file(filename, url, year):
     """
     Download the file and save it locally for future use
     """
-    #filename = 'openfoodfacts-products.jsonl.gz'
     response = requests.get(url, stream=True)
     response.raise_for_status() #raise an HTTPError for bad responses
     
@@ -23,18 +25,16 @@ def get_file(filename, url, year):
         #n = 1
         for chunk in response.iter_content(chunk_size=1024):
             fd.write(chunk)
-            #print(f"written chunck {n}")
-            #n+=1
-    return os.path.isfile(f'../data/{year}/{filename}')
+    if os.path.isfile(f'../data/{year}/{filename}'):
+        return True
+    raise FileNotFoundError(f"The file {filename} does not exist")
+    
 
-
-def web_to_local(file_name):
+def web_to_local(file_name, years, db_name):
     """
     Download the file and save it locally for future use
     """
-    years = ['2019', '2020', '2021', '2022']
     year = None
-    db_name = 'project.db'
     with open(file_name, encoding='utf-8') as f:
         for line in f:
             if line.strip('\n ') in years:
@@ -55,15 +55,18 @@ def web_to_local(file_name):
                             + f" FROM read_csv('../data/{year}/{filename}');")
                     con.table(f"{schema_name}.{table_name}").show()
                     con.close()
-                    print(filename)        
-    return 0
+                    #print(filename)        
+                    return 0
+    raise ValueError("Problem during the creation of the database")
 
 
 def main(file_name):
     """
     main data ingestion function
     """
-    web_to_local(file_name)
+    years = ['2019', '2020', '2021', '2022']
+    db_name = 'project.db'
+    web_to_local(file_name, years, db_name)
     
 if __name__ == "__main__":
     file_name = 'dataset.txt'
