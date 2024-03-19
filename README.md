@@ -1,7 +1,7 @@
 # DE Zoomcamp - Capstone project: A study on car accidents in France between 2019 and 2022
 ![Tools landscape](images/tools_list.png)
 
-This repository contains the implementation of my capstone project, from participating in the Data engineering zoomcamp, 2024 cohort. The project is about analyzing the progression of car accidents in France, from 2019 to 2022, with a focus on the evolution of the deceased people. 
+This repository contains the implementation of my capstone project, from participating in the Data engineering zoomcamp, 2024 cohort. The project is about analyzing the progression of car accidents in France, from 2019 to 2022, with a focus on the evolution of the number of deceased people. 
 
 The data will be fetched from a web open data platform, processed with and loadded into **DuckDB** as a local datawarehouse (for staging and dev area for data transformation), transformed using **dbt-core** and pushed into **BigQuery** as a production data warehouse, and then visualised using **Apache Superset**. 
 
@@ -21,7 +21,7 @@ The dataset we are working with is extracted from the French government open dat
 
 &rarr; simple python script for downloading the data ;
 
-&rarr; DuckDB as local datawarehouse where we are storing the dowloaded data (we will create a schema called raw that will contain the conrresponding data).
+&rarr; DuckDB as local datawarehouse where we are storing the dowloaded data (we will create a schema called raw_data that will contain the conrresponding data).
 
 The extraction script will be executed only once.
 

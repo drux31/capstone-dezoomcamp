@@ -52,11 +52,12 @@ def create_staging(db_name):
     con.close()
     return 0
 
-def main(db_name):
+def main():
     """
     main data ingestion function
     """
+    db_name='project_dw.db'
     create_staging(db_name)
     
 if __name__ == "__main__":
-    main(db_name='project.db')
+    main()
