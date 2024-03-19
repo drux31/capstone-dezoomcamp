@@ -53,7 +53,10 @@ In this part, we will use Airflow to use the data in two pipelines to the stagin
 * a first pipeline that will load a  batch of data between 2019 and 2021 ;
 * and another pipeline that will load the data from 2022 daily ; we are doing this since the dataset is updated once a year, so we are manually simulating a daily update from the 2022 data into the data warehouse.
 
-1.  INstalling Airflow
+We xill need to install airflow to be able to complete the ingestion process.
+
+1.  Installing Airflow
+
 Following the [documentation](https://airflow.apache.org/docs/apache-airflow/stable/start.html), we will install airflow using pip. Our configuration is the following:
 * setting airflow home : ```export AIRFLOW_HOME=~/de_project/capstone-dezoomcap/airflow```
 
