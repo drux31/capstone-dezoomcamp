@@ -1,6 +1,7 @@
 # Folders
 .venv
 data
+__pycache__
 
 # files
 *env
