@@ -49,12 +49,12 @@ def web_to_local(file_name, db_name):
                     schema_name = 'raw_data'
                     table_name = filename.split('.')[0]
                     con.sql(f"CREATE SCHEMA IF NOT EXISTS {schema_name};")
-                    con.sql(f"CREATE TABLE IF NOT EXISTS {schema_name}.{table_name}" 
+                    con.sql(f"CREATE TABLE"
+                            + f" IF NOT EXISTS {schema_name}.{table_name}"
                             + " AS SELECT * "
                             + f" FROM read_csv('../data/{year}/{filename}');")
                     con.table(f"{schema_name}.{table_name}").show()
-                    con.close()
-                    #print(filename)        
+                    con.close()       
         return 0
     raise Exception("Problem during the creation of the database")
     
@@ -63,8 +63,7 @@ def main(file_name):
     """
     main data ingestion function
     """
-    #years = ['2022', '2021', '2020', '2019']
-    db_name = 'project.db'
+    db_name = 'project_dw.db'
     web_to_local(file_name, db_name)
     
 if __name__ == "__main__":
