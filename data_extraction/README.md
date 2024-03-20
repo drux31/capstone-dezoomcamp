@@ -18,7 +18,7 @@ The scripts can be found in the data_ingestion folder and be ran either using th
 
     * then run the extraction script
     ```
-    cd data_ingestion;./data_extraction.py
+    cd data_extraction;./data_extraction.py
     ```
 
 2. using the Makefile
@@ -27,7 +27,7 @@ The ```Makefile``` is built in a way that the tests will always be ran before th
 make
 ```
 
-In both cases, you will end up with a DuckDB database named ```project_dw.db```, that will all the data stored in it.
+In both cases, you will end up with a DuckDB database named ```project_dw.db```, in the ```data``` folder located in the root of the project folder. This will be our local data warehouse for ingestion process, we will also use it for our staging and dev environment for data transformation.
 
-Architecture :
+### Architecture
 ![alt Architexture for data extraction](../images/data_extraction.png)
