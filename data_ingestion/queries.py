@@ -91,25 +91,22 @@ q_lieux_2019 = """
     from raw_data.lieux_2019
     """
 
+# Lieux from 2019 to 2021
 query_union_lieux = " ".join([q_lieux_2021, 
                        "union all by name",
                        q_lieux_2020,
                        "union all by name",
-                       q_lieux_2022,
-                       "union all by name",
                        q_lieux_2019])
 
-#usagers
+#usagers from 2019 to 2021
 query_union_usagers = " ".join([
             "select * from raw_data.usagers_2019",
             "union all by name",
             "select * from raw_data.usagers_2020",
             "union all by name",
-            "select * from raw_data.usagers_2021",
-            "union all by name",
-            "select * from raw_data.usagers_2022"])
+            "select * from raw_data.usagers_2021"])
 
-#caractéristiques
+#caractéristiques from 2019 to 2022
 query_carac_2019 = """
     select 
         Num_Acc,
@@ -196,12 +193,10 @@ query_union_carac = " ".join([
     "union all by name",
     query_carac_2020,
     "union all by name",
-    query_carac_2021,
-    "union all by name",
-    query_carac_2022
+    query_carac_2021
 ])
 
-# vehicules
+# vehicules from 2019 to 2022
 query_vhl_2019 = """
     select 
         Num_Acc,
@@ -267,7 +262,5 @@ query_union_vhl = " ".join([
     "union all by name",
     query_vhl_2020,
     "union all by name",
-    query_vhl_2021,
-    "union all by name",
-    query_vhl_2022
+    query_vhl_2021
 ])

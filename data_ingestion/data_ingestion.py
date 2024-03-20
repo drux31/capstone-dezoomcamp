@@ -56,7 +56,7 @@ def main():
     """
     main data ingestion function
     """
-    db_name='project_dw.db'
+    db_name='../data/project_dw.db'
     create_staging(db_name)
     
 if __name__ == "__main__":
