@@ -264,3 +264,22 @@ query_union_vhl = " ".join([
     "union all by name",
     query_vhl_2021
 ])
+
+query_seq = """
+create or replace sequence staging.dw_log_table_id_sequence start 1
+"""
+
+query_dw_log_table = """
+create or replace table staging.dw_log_table (
+    id int default nextval('staging.dw_log_table_id_sequence'),
+    schema_name varchar not null,
+    table_name varchar unique not null,
+    table_row_count int not null,
+    last_update date not null
+)
+"""
+
+query_insert_dw_log_table = """
+insert into staging.dw_log_table (schema_name, table_name, table_row_count, last_update)
+select 'staging', 'usagers_all', count(*), '2021-12-31' from staging.usagers_all"
+"""
