@@ -22,9 +22,9 @@ The scripts can be found in the data_ingestion folder and be ran either using th
     ```
 
 2. using the Makefile
-The ```Makefile``` is built in a way that the tests will always be ran before the excution. And if something fails, the execution will not start. You just need one command:
+The ```Makefile``` is built in a way that the tests will always be ran before the excution. So if something fails, the execution will not start. You just need one command that is:
 ```
-make
+make extract
 ```
 
 In both cases, you will end up with a DuckDB database named ```project_dw.db```, in the ```data``` folder located in the root of the project folder. This will be our local data warehouse for ingestion process, we will also use it for our staging and dev environment for data transformation.
