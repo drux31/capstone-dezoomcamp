@@ -23,3 +23,9 @@ CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${A
 
 pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 ```
+
+Once aiflow is installed, we need first to do two things : 
+* create dags and plugins folder into airflow home folder (use ```use mkdir command```) ;
+* change the file ``` airflow.cfg ``` by setting ``` load_examples ``` to false (line 106) and making the dags folder is correctly configured ``` dags_folder = path_to_airflow_home/dags ``` (line 7). The path needs to be absolute (It looks like this in my case ``` dags_folder = /home/drux/de_project/capstone-dezoomcap/airflow/dags ```).
+
+Another point to note is that you will need to add the variable AIRFLOW_HOME to your .profile file, so don't have to set it manually everytime you launch airflow.
