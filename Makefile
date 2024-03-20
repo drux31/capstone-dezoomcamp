@@ -14,3 +14,9 @@ git_commit: git_add
 	git commit -m "$(comment)"
 git_add:
 	git add .
+
+### Loading airflow
+load_airflow: set_env
+	airflow standalone
+set_env:
+	export AIRFLOW_HOME=~/de_project/capstone-dezoomcap/airflow/
