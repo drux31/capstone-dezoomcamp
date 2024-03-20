@@ -2,10 +2,10 @@
 .venv
 data
 __pycache__
-airflow
 .pytest_cache
 
 # files
 *env
 *.db
-!airflow/dags/*.py
+airflow/*
+!airflow/dags/
