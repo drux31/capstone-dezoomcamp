@@ -3,6 +3,7 @@
 data
 __pycache__
 airflow
+.pytest_cache
 
 # files
 *env

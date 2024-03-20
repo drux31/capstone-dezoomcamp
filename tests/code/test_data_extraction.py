@@ -1,4 +1,4 @@
-from data_ingestion.data_extraction import web_to_local
+from data_extraction.data_extraction import web_to_local
 import os
 import pytest
 from pytest import raises, fail

@@ -63,7 +63,7 @@ def main(file_name):
     """
     main data ingestion function
     """
-    db_name = 'project_dw.db'
+    db_name = '../data/project_dw.db'
     web_to_local(file_name, db_name)
     
 if __name__ == "__main__":
