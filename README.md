@@ -11,7 +11,7 @@ We will use **Apache Airflow** as an orchestrator for the dbt-core production bu
 The project is divided in four main parts: 
 1. [data extraction](https://github.com/drux31/capstone-dezoomcamp/tree/main/data_extraction) ;
 2. [data ingestion](https://github.com/drux31/capstone-dezoomcamp/tree/main/data_ingestion);
-3. data transformation ;
+3. [data transformation](https://github.com/drux31/capstone-dezoomcamp/tree/main/data_transformation) ;
 4. data visualisation.
 
 ## General architecture

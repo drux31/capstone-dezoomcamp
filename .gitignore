@@ -4,8 +4,16 @@ data
 __pycache__
 .pytest_cache
 
+target/
+dbt_packages/
+logs/
+
+
 # files
 *env
 *.db
 airflow/*
 !airflow/dags/
+!categories_vhl.csv
+!codes_communes.csv
+!codes_departements.csv

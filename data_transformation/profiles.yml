@@ -1,0 +1,13 @@
+data_transformation:
+  outputs:
+    dev:
+      type: duckdb
+      path: /home/drux/de_project/capstone-dezoomcap/data/project_dw.db
+      threads: 4
+
+    prod:
+      type: duckdb
+      path: prod.duckdb
+      threads: 4
+
+  target: dev
