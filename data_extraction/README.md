@@ -1,4 +1,6 @@
 ## Data extraction
+![Architexture for data extraction](../images/data_extraction.png)
+
 The dataset we are working with is extracted from the French government open data platform, with a focus on the data produced between 2019 and 2022. Since we are working with structured data only, there is no need to set up a data lake for object storage. Then the data will be extracted using a python script and stored localy in DuckDB, used as a local datawarehouse.
 
 **Tools used for this process** : 
@@ -28,6 +30,3 @@ make extract
 ```
 
 In both cases, you will end up with a DuckDB database named ```project_dw.db```, in the ```data``` folder located in the root of the project folder. This will be our local data warehouse for ingestion process, we will also use it for our staging and dev environment for data transformation.
-
-### Architecture
-![alt Architexture for data extraction](../images/data_extraction.png)

@@ -1,4 +1,6 @@
 ## Data ingestion
+![Data ingestion General architecture](../images/data_ingestion.png)
+
 In this part, we will use Airflow to use the data in two pipelines to the staging area:
 * a first pipeline that will load a  batch of data between 2019 and 2021 ;
 * and another pipeline that will load the data from 2022 daily ; we are doing this since the dataset is updated once a year, so we are manually simulating a daily update from the 2022 data into the data warehouse.
