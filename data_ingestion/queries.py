@@ -196,7 +196,7 @@ query_union_carac = " ".join([
     query_carac_2021
 ])
 
-# vehicules from 2019 to 2022
+# vehicules from 2019 to 2021
 query_vhl_2019 = """
     select 
         Num_Acc,
@@ -273,7 +273,7 @@ query_dw_log_table = """
 create or replace table staging.dw_log_table (
     id int default nextval('staging.dw_log_table_id_sequence'),
     schema_name varchar not null,
-    table_name varchar unique not null,
+    table_name varchar not null,
     table_row_count int not null,
     last_update date not null
 )
