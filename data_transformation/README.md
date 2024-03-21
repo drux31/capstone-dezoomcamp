@@ -14,6 +14,8 @@ Being concrete, we will mainly have to do following :
 
 ### Creating the models for the staging area
 
+![lineage graph](../images/lineage_graph.png)
+
 #### Staging models
 Our staging area includes the following models : 
 * ```stg_caracteritiques```: which transforms the data about the characteristics of all the accidents (identified uniquely) ;
