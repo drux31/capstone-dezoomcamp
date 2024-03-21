@@ -1,0 +1,179 @@
+
+version: 2
+
+sources:
+  - name: staging 
+    schema: staging 
+    
+    tables:
+      - name: usagers_all
+        description: "Données brutes sur les usagers concernés par les accidents"
+      - name: lieux_all
+        description: "Données brutes sur les lieux où se sont produits les accidents"
+      - name: caracteristiques_all
+        description: "Données brutes sur les caractéristiques des accidents"
+      - name: vehicules_all
+        description: "Données brutes sur les véhicules impliqués dans les accidents"
+
+models:
+  - name: stg_caracteristiques
+    description: "Données caractériques de l'accident dans l'ODS"
+    columns:
+      - name: accident_id
+        decription: "Identifiant unique de l'accident"
+        test:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+        
+      - name: accident_date
+        decription: "Date de l'accident"
+        test:
+          - not_null:
+              severity: warn
+      
+      - name: luminisote
+        decription: "Codes des conditions de luminosité de l'accident"
+        
+      - name: description_luminosite
+        decription: "Description littérale des conditions de luminosité"
+
+      - name: code_departement
+        decription: "Code du département dans lequel a eu lieu l'accident"
+
+      - name: code_commune
+        decription: "Code de la commune dans laquelle a eu lieu l'accident"
+
+      - name: localisation
+        decription: "code indiquant si l'accident a eu en agglo ou en dehors"
+      
+      - name: description_localisation
+        decription: "decription littérale du code de la localisation"
+      
+      - name: cond_atmospherique
+        decription: "Code décrivant les conditions athmosphériques"
+      
+      - name: dsc_cond_admonspherique
+        decription: "Description littérale des conditions atmosphériques"
+      
+      - name: adresse_postale
+        decription: "Adresse postale localisant l'accident"
+      
+      - name: latitude
+        decription: "Coordonnée géographique du lieu de l'accident (latitude)"
+
+      - name: longitude
+        decription: "Coordonnée géographique du lieu de l'accident (longitude)"
+  
+
+  - name: stg_vehicules
+    description: "Informations sur les usagers impliqués dans l'accident - données ODS"
+    columns:
+      - name: accident_id
+        decription: "Identifiant unique de l'accident"
+        test:
+          - not_null:
+              severity: warn
+          - relationships:
+              to: ref('stg_caracteristiques')
+              field: accident_id
+              severity: warn
+
+      - name: vehicule_id
+        decription: "Identifiant unique du véhicule impliqué"
+        test:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+        
+      - name: code_categorie_vhl
+        decription: "Code de la catégorie de véhicule"
+
+      - name: motorisation
+        decription: "Code de la motorisation du véhicule"
+      
+      - name: description_motirisation
+        decription: "Description littérale de la motorisation du véhicule"
+
+      - name: nb_occupant
+        decription: "Nombre d'occupants dans le cas d'un véhicule de transport en commun, type bus de ville"
+  
+
+  - name: stg_lieux
+    description: "Informations sur le lieu de l'accident dans l'ODS"
+    columns:
+      - name: accident_id
+        decription: "Identifiant unique de l'accident"
+        test:
+          - not_null:
+              severity: warn
+          - relationships:
+              to: ref('stg_caracteristiques')
+              field: accident_id
+              severity: warn
+
+      - name: categorie_route
+        decription: "Type de route où s'est déroulé l'accident"
+      
+      - name: dsc_categorie_route
+        decription: "Description littérale du type de route"
+
+      - name: numero_route
+        decription: "Numéro de la voie de l'accident"
+
+      - name: vitesse_max
+        decription: "Vitesse maximale autorisée sur la route concernée"
+
+
+  - name: stg_usagers
+    description: "Informations sur les usagers impliqués dans l'accident - données ODS"
+    columns:
+      - name: accident_id
+        decription: "Identifiant unique de l'accident"
+        test:
+          - not_null:
+              severity: warn
+          - relationships:
+              to: ref('stg_caracteristiques')
+              field: accident_id
+              severity: warn
+
+      - name: vehicule_id
+        decription: "Identifiant unique du véhicule impliqué"
+        test:
+          - not_null:
+              severity: warn
+          - relationships:
+              to: ref('stg_vehicules')
+              field: vehicule_id
+              severity: warn
+        
+      - name: categorie_usager
+        decription: "Catégorie de l'usager impliqué dans l'accident (piéton, conducteur, etc...)"
+      
+      - name: description_categorie_usager
+        decription: "Description littérale de la catégorie usager"
+
+      - name: gravite_blessure
+        decription: "Gravité de la blessure de l'usager impliqué dans l'accident"
+      
+      - name: description_gravite
+        decription: "Description littérale de la gravité de la blessure"
+
+      - name: genre_usager
+        decription: "Code indiquant le sexe de l'usager"
+      
+      - name: description_genre_usager
+        decription: "Description littérale du sexe de l'usager (homme ou femme)"
+
+      - name: annee_naissance
+        decription: "Année de naissance de la personne impliquée"
+
+      - name: trajet_accident
+        decription: "Code indiquant le trajet que réalisait l'individu"
+
+      - name: description_trajet
+        decription: "Description littérale du trajet (trajet domicile-travail par exemple)"
+    

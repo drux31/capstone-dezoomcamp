@@ -1,0 +1,142 @@
+version: 2
+
+models:
+  - name: dim_categories_vhl
+    desciption: >
+      liste littérale des catégories de véhicules identifiées par la donnée code_categorie_vhl
+    columns: 
+      - name: code_categorie_vhl
+        description: "Code unique de chaque catégorie de véhicule"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: libelle_categorie_vhl
+        description: "Description littérale de la catégorie de véhicule"
+
+  
+  - name: dim_departements
+    description: >
+      liste unique des départements connus en France, répertoriés par l'INSEE
+    columns:
+      - name: code_departement
+        description: "Code unique de chaque département"
+        tests:
+          - not_null:
+              severity: error
+      
+      - name: nom_departement
+        description: "Nom littéral du département"
+
+      - name: nom_region
+        description: "Nom littéral de la région de rattachement du département"
+
+
+  - name: dim_communes
+    description: >
+      liste unique des communes connues en France, répertoriées par l'INSEE
+    columns:
+      - name: code_commune
+        description: "Code unique de chaque commune"
+        tests:
+          - not_null:
+              severity: error
+
+      - name: code_departement
+        description: "Code du département de rattachement de la commune"
+        tests:
+          - relationships:
+              to: ref('dim_departements')
+              field: code_departement
+              severity: error
+
+      - name: nom_commune
+        description: "Nom littéral de la commune"
+
+  - name: fact_accidents_annuels
+    description: >
+      Accidents annuels regroupés par caractéristiques, usagers et véhicules concernés.
+      les données complémentaires sur les départements et les communes ont été ajoutées.
+      Il n'est pas possible d'identifier de manière unique chaque ligne, chaque accident pouvant impliquer plusieurs personnes.
+      Il a cependant été ajouté une colonne permettant de savoir pour chaque accident le nombre d'usagers concernés.
+    columns:
+      - name: accident_id
+        description: "Identifiant de l'accident"
+
+      - name: accident_date
+        description: "Date de l'accident"
+      
+      - name: cond_atmospherique
+        description: "Code - Conditions atmosphériques de l'accident"
+
+      - name: dsc_cond_admonspherique
+        description: "Description - Conditions atmosphériques de l'accident"
+
+      - name: luminisote
+        description: "Code - Conditions de luminisoté de l'accident"
+
+      - name: description_luminosite
+        description: "Description - Conditions de luminisoté de l'accident"
+
+      - name: categorie_route
+        description: "Code - catégorie de route de l'accident"
+
+      - name: dsc_categorie_route
+        description: "Description - catégorie de route de l'accident"
+
+      - name: nom_departement
+        description: "Nom du département de l'accident"
+
+      - name: nom_region
+        description: "Nom de la région de l'accident"
+
+      - name: nom_commune
+        description: "Nom de la commune de l'accident"
+
+      - name: latitude
+        description: "Coordonnée géographique - Latitude"
+
+      - name: longitude
+        description: "Coordonnée géographique - Longitude"
+
+      - name: motorisation
+        description: "Code - motorisation du véhicule impliqué dans l'accident"
+
+      - name: description_motirisation
+        description: "Description - motorisation du véhicule impliqué dans l'accident"
+
+      - name: nb_occupant_vhl_public
+        description: "Nombre d'occupants du véhicule, dans le cas de transports publiques"
+
+      - name: annee_naissance_usager
+        description: "Année de naissance de l'usager"
+
+      - name: genre_usager
+        description: "Code - sexe de l'usager"
+
+      - name: description_genre_usager
+        description: "Description - sexe de l'usager"
+
+      - name: gravite_blessure
+        description: "Code - niveau de gravité de la blessure de l'usager"
+
+      - name: description_gravite
+        description: "Description - niveau de gravité de la blessure de l'usager"
+
+      - name: categorie_usager
+        description: "Code - catégorie de l'usager"
+
+      - name: description_categorie_usager
+        description: "Description - catégorie de l'usager"
+
+      - name: trajet_accident
+        description: "Code - type de trajet réalisé par l'usager"
+
+      - name: descriptidescription_trajeton_gravite
+        description: "Description - type de trajet réalisé par l'usager"
+
+      - name: nb_usagers_par_accidents
+        description: "comptage du nombre de passagers impliqués dans un accident"
+
+      - name: nb_vehicules_par_accidents
+        description: "comptage du nombre de véhicules impliqués dans un accident"
