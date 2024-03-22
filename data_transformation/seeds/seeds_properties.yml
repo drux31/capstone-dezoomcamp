@@ -13,7 +13,7 @@ seeds:
       Liste des départements et leurs régions associées.
   - name: categories_vhl
     config:
-      column_types: {code_categ: int64, libelle_categ: varchar(100)}
+      column_types: {code_categ: int64, libelle_categ: string}
       delimiter: ','
     description: >
       Catégorie des véhicules impliqués dans des accidents.

@@ -37,7 +37,11 @@ Macros are Jinja pieces of code that can be reused multiple times. We defined so
 
 #### Running in production
 Once we are finished creating our models locally, and are sure that everything works perfectly, we are ready to deploy to production.
-fist, we need to [create the production datawarehouse]()
+fist, we need to [create the production datawarehouse](https://github.com/drux31/capstone-dezoomcamp/tree/main/production_setup), and then run the following commands (in that order):
+1. ``` dbt seed ``` ;
+2. ``` dbt run ``` ;
+3. ``` dbt test ``` ;
+4. ``` dbt build ``` ;
 
 
 ### Tips for the local installation
