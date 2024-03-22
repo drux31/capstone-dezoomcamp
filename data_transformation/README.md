@@ -35,6 +35,10 @@ Macros are Jinja pieces of code that can be reused multiple times. We defined so
 #### Core models
 
 
+#### Running in production
+Once we are finished creating our models locally, and are sure that everything works perfectly, we are ready to deploy to production.
+fist, we need to [create the production datawarehouse]()
+
 
 ### Tips for the local installation
 
