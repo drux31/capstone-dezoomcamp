@@ -1,4 +1,5 @@
 ## Data transformation
+![Data transformation architecture](../images/data_transformation.png)
 
 For this part, we will be working with dbt core. The transformation is divided in three parts : 
 1. creating the models for the staging area ;
