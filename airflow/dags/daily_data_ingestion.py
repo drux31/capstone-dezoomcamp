@@ -195,10 +195,10 @@ def process_daily_data():
         #with open("out.csv", "rb") as source_file:
         #    job = client.load_table_from_file(source_file, table_id, job_config=job_config)
         uris = {
-            "drux-de-zoomcamp.staging.usagers_all": "gs://dez-capstone-bucket/initial_load/usagers_data.parquet",
-            "drux-de-zoomcamp.staging.lieux_all": "gs://dez-capstone-bucket/initial_load/lieux_data.parquet",
-            "drux-de-zoomcamp.staging.vehicules_all": "gs://dez-capstone-bucket/initial_load/vehicules_data.parquet",
-            "drux-de-zoomcamp.staging.caracteristiques_all": "gs://dez-capstone-bucket/initial_load/caracteristiques_data.parquet"
+            "drux-de-zoomcamp.staging.usagers_all": "gs://dez-capstone-bucket/daily_load/usagers_data.parquet",
+            "drux-de-zoomcamp.staging.lieux_all": "gs://dez-capstone-bucket/daily_load/lieux_data.parquet",
+            "drux-de-zoomcamp.staging.vehicules_all": "gs://dez-capstone-bucket/daily_load/vehicules_data.parquet",
+            "drux-de-zoomcamp.staging.caracteristiques_all": "gs://dez-capstone-bucket/daily_load/caracteristiques_data.parquet"
         }
         #"gs://cloud-samples-data/bigquery/us-states/us-states.parquet"
         for k, uri in uris.items():

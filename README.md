@@ -13,5 +13,6 @@ The project is divided in four main parts:
 2. [data ingestion](https://github.com/drux31/capstone-dezoomcamp/tree/main/data_ingestion);
 3. [data transformation](https://github.com/drux31/capstone-dezoomcamp/tree/main/data_transformation) ;
 4. data visualisation.
+5. reproductibility
 
 ## General architecture
