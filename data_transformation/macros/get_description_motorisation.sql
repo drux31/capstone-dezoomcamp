@@ -2,9 +2,9 @@
     Cette macro retourne la description de la motorisation 
 #}
 
-{% macro get_description_motorisation(motorisation) -%}
+{% macro get_description_motorisation(motor) -%}
 
-    case motorisation  
+    case motor  
         when 1 then 'Hydrocarbures'
         when 2 then 'Hybride'
         when 3 then 'Electrique'
