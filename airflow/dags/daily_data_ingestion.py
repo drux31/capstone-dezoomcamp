@@ -9,7 +9,9 @@ import os
 import duckdb
 import datetime
 import pendulum
+
 from airflow.decorators import dag, task
+from airflow.operators.bash import BashOperator
 from google.cloud import storage, bigquery
 
 from queries import (
@@ -19,10 +21,12 @@ from queries import (
 )
 
 DATA_FOLDER = os.environ["DATA_FOLDER"]
+PATH_TO_DBT_PROJECT = os.environ["DBT_PROJECT_FOLDER"]
 
 @dag(
         dag_id="process-daily-data-2022",
-        schedule_interval="0 0 * * *",
+        #schedule_interval="0 0 * * *",
+        schedule="@daily",
         start_date=pendulum.datetime(2024, 3, 21, tz="UTC"),
         catchup=False,
         dagrun_timeout=datetime.timedelta(minutes=5),
@@ -106,7 +110,6 @@ def process_daily_data():
         con.close()
         print("------------------------------ ingestion completed for staging area ------------------------")
         return {"db_name": db_name, "last_date": last_date}
-
 
     @task(task_id="Staging_to_GCS")
     def load_staging_to_gcs(db_name: str):
@@ -267,7 +270,22 @@ def process_daily_data():
         con.close()
         print("------------------------------ Writing logs completed ------------------------")
         return 0
+    
+    # t1, t2 and t3 are examples of tasks created by instantiating operators
+    t1 = BashOperator(
+        task_id="test_dbt",
+        cwd=PATH_TO_DBT_PROJECT,
+        bash_command="dbt test",
+    )
+
+    t2 = BashOperator(
+        task_id="build_dbt",
+        bash_command="dbt build",
+        cwd=PATH_TO_DBT_PROJECT,
+        retries=2,
+    )
+
     res = get_daily_data()
-    [write_log(res["db_name"], res["last_date"]), load_staging_to_gcs(res["db_name"]) >> gcs_to_bq()]
+    [write_log(res["db_name"], res["last_date"]), load_staging_to_gcs(res["db_name"]) >> gcs_to_bq() >> t1 >> t2]
 process_daily_data()
     
