@@ -28,7 +28,7 @@ pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}
 
 Once airflow is installed, we need first to do two things : 
 * create dags and plugins folder into airflow home folder (use ```mkdir```) ;
-* change the file ``` airflow.cfg ``` by setting ``` load_examples ``` to false (line 106) and making the dags folder is correctly configured ``` dags_folder = path_to_airflow_home/dags ``` (line 7). The path needs to be absolute (It looks like this in my case ``` dags_folder = /home/drux/de_project/capstone-dezoomcap/airflow/dags ```).
+* change the file ``` airflow.cfg ``` by setting ``` load_examples ``` to false (line 106) and making the dags folder is correctly configured ``` dags_folder = path_to_airflow_home/dags ``` (line 7). The path needs to be absolute (It looks like this in my case ``` dags_folder = ~/de_project/capstone-dezoomcap/airflow/dags ```).
 
 Another point to note is that we will need to add the variable AIRFLOW_HOME to our .profile file, so we don't have to set it manually everytime you launch airflow.
 
@@ -58,3 +58,9 @@ If everything went fine, we will get the following in the logs of each tasks:
 ![Log shown after the first daily DAG](../images/logs_first_daily.png)
 
 ![Daily DAG graphs](../images/daily_dag_graph.png)
+
+
+#### Troubleshooting
+kill -9 `ps -aux | grep airflow | awk '{print $2}'`
+kill -9 `ps aux | grep airflow | awk '{print $2}'`
+kill -9 `ps -aux | grep airflow | awk '{print $2}'`

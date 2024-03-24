@@ -3,3 +3,5 @@ when setting up terraform with GCP, instead of adding the path to the credential
 	export GOOGLE_CREDENTIALS='absolute path to the service account's json credential file'
 	```
 
+export GOOGLE_APPLICATION_CREDENTIALS=~/.google/credentials/drux-de-zoomcamp-terraform-runner.json
+pip install --upgrade google-cloud-bigquery

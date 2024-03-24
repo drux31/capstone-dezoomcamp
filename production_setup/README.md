@@ -19,3 +19,9 @@ This env variable can be used in profiles.yml, when configuring bigquery, (from 
 ``` 
 keyfile: "{{ env_var('GOOGLE_CREDENTIALS') }}" 
 ```
+
+pip install --upgrade google-cloud-bigquery
+pip install --upgrade google-cloud-storage
+export GOOGLE_APPLICATION_CREDENTIALS=~path to google credential .json
+export DATA_FOLDER=path to data folder
+export PROJET_FOLDER=path to capstone project
