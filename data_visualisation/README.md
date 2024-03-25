@@ -1,4 +1,6 @@
 ## Visualisation
+![Accident dashboard](../images/accidents-dashboard-capstone-viz.jpg)
+
 This part is about creating a dashboard from the data ingested with dbt.
 
 we will try to use superset instead of looker from google.
@@ -48,7 +50,7 @@ Now we are ready to launch our image.
 4. launch the docker image
 
 ```
-docker run -d -p 8080:8088 \
+docker run -d -p 8000:8088 \
 -e "SUPERSET_SECRET_KEY=the key generated above" \
 --name superset local/superset
 ```

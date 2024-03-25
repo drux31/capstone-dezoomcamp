@@ -7,7 +7,7 @@ q_lieux_2021 = """
         v1,
         v2,
         circ,
-        cast(nullif(nbv, '#ERREUR') as BIGINT) as nbv,
+        nbv,
         vosp,
         prof,
         pr,
@@ -19,7 +19,7 @@ q_lieux_2021 = """
         infra,
         situ,
         vma
-    from raw_data.lieux_2022
+    from raw_data.lieux_2021
     
     """
 q_lieux_2022 = """
@@ -30,6 +30,7 @@ q_lieux_2022 = """
         v1,
         v2,
         circ,
+        --nbv becomes a varchar for 2022 dataset
         cast(nullif(nbv, '#ERREUR') as BIGINT) as nbv,
         vosp,
         prof,
@@ -53,7 +54,7 @@ q_lieux_2020 = """
         v1,
         v2,
         circ,
-        cast(nullif(nbv, '#ERREUR') as BIGINT) as nbv,
+        nbv,
         vosp,
         prof,
         pr,
@@ -65,7 +66,7 @@ q_lieux_2020 = """
         infra,
         situ,
         vma
-    from raw_data.lieux_2022
+    from raw_data.lieux_2020
     
     """
 q_lieux_2019 = """
