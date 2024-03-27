@@ -85,27 +85,3 @@ and finaly, navigate to http://localhost:8080/login/ and take a look (u/p: [admi
 sources : 
 1. [running superset with docker image](https://hub.docker.com/r/apache/superset)
 2. [official doc](https://superset.apache.org/docs/intro)
-
-### Creating dashboard 
-1. Graph 1 - amount of trips per day and service types
-
-![alt Amount of trip per day and service type](image.png)
-
-
-2. Total trips recoded in the period of time
-
-![alt total trips recorded](image-1.png)
-
-
-3. Service type distribution
-
-![alt service type distribution](image-2.png)
-
-
-4. Trips per pickup zones
-
-![alt trips per pickup zones](image-3.png)
-
-5. Trips per months and service types
-
-![alt text](image-4.png)
