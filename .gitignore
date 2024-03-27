@@ -1,9 +1,10 @@
 # Folders
 .venv
-data
 __pycache__
 .pytest_cache
 logs
+data/*
+!data/dataset.txt
 
 # files
 *env

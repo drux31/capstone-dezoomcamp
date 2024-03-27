@@ -1,0 +1,9 @@
+google-cloud-bigquery
+google-cloud-storage
+requests
+pendulum
+duckdb
+dbt-bigquery
+dbt-core
+dbt-duckdb
+
