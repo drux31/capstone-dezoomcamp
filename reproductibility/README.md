@@ -81,7 +81,160 @@ If everything went fine, we will get the following in the logs of each tasks:
 
 #### Troubleshooting
 ##### Kill all runing airflow subprocess.
-kill -9 `ps -aux | grep airflow | awk '{print $2}'`
-kill -9 `ps aux | grep airflow | awk '{print $2}'`
-kill -9 `ps -aux | grep airflow | awk '{print $2}'`
+```kill -9 `ps -aux | grep airflow | awk '{print $2}'```
 
+### Data transformation
+
+Once dbt is installed, we need to initialise the project, the name of the folder will be ```data_transformation``` in this case.
+* initialise the project :
+    * check dbt version:  ``` dbt --version```
+    this will make sure dbt is correctly istalled ;
+    * initialise ```data_transformation``` project: ``` dbt init data_transformation ```
+    there will be a prompt asking to select the database used, we will go with duckDB at first, for staging models and dev builds ;
+    * enter the newly created folder: ``` cd data_transformation ``` ;
+    * create a profile file: ``` touch profiles.yml ``` ;
+    * paste the following content inside: 
+    ``` 
+    data_transformation:
+    outputs:
+        dev:
+        type: duckdb
+        path: path/to/you/dckdb/data warehouse/generated in the previous steps.db
+        threads: 4
+
+        prod:
+        type: duckdb
+        path: prod.duckdb
+        threads: 4
+
+    target: dev
+
+    ``` 
+    For now, we do not care about the values of the prod part, we will change it later ;
+    * finaly, add the path (absolute) of profiles.yml the dbt config: 
+    ```  
+    dbt run --profiles-dir absolute/path/to/data_transformation
+    ```
+    You should have an ouput like this:
+    ```
+    15:48:14  Running with dbt=1.7.8
+    15:48:15  Registered adapter: duckdb=1.7.2
+    15:48:15  Unable to do partial parsing because saved manifest not found. Starting full parse.
+    15:48:15  Found 2 models, 4 tests, 0 sources, 0 exposures, 0 metrics, 391 macros, 0 groups, 0 semantic models
+    15:48:15  
+    15:48:15  Concurrency: 1 threads (target='dev')
+    15:48:15  
+    15:48:15  1 of 2 START sql table model main.my_first_dbt_model ........................... [RUN]
+    15:48:16  1 of 2 OK created sql table model main.my_first_dbt_model ...................... [OK in 0.10s]
+    15:48:16  2 of 2 START sql view model main.my_second_dbt_model ........................... [RUN]
+    15:48:16  2 of 2 OK created sql view model main.my_second_dbt_model ...................... [OK in 0.03s]
+    15:48:16  
+    15:48:16  Finished running 1 table model, 1 view model in 0 hours 0 minutes and 0.23 seconds (0.23s).
+    15:48:16  
+    15:48:16  Completed successfully
+    ```
+    Now you're good to go. You can follow the doc for further instructions on the [official doc](https://docs.getdbt.com/guides/manual-install?step=1)  of dbt-core.
+* create your models (staging, core)
+* build the dev environment.
+
+Note that if you do not want to run a dbt command, having to include --profile-dir everytime, you should set an env variable:
+```
+export DBT_PROFILES_DIR=path/to/directory/containing profiles.yml
+``` 
+#### Running in production
+Once we are finished creating our models locally, and are sure that everything works perfectly, we are ready to deploy to production.
+fist, we need to [create the production datawarehouse](https://github.com/drux31/capstone-dezoomcamp/tree/main/production_setup), and then run the following commands (in that order):
+1. ``` dbt seed ``` ;
+2. ``` dbt run ``` ;
+3. ``` dbt test ``` ;
+4. ``` dbt build ```.
+
+#### Resources:
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
+- Find [dbt events](https://events.getdbt.com) near you
+- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+### Data visualisation
+
+#### Setting up superset
+Since we are in dev env, we will just use the docker image to launch superset.
+
+1. download the dockerimage :
+```
+docker pull apache/superset
+```
+
+2. create a secret key:
+
+```
+openssl rand -base64 42
+```
+copy the generated secret key and keep it because we are going to use it later.
+
+3. add bigquery library
+The docker image that we pulled contains only the minimal packages needed for testing in dev env. So we will need to add BigQuery manually :
+
+* first we will have to create a docker file
+```
+touch Dockerfile
+```
+
+* file and add our custom in it: 
+```
+FROM apache/superset
+# Switching to root to install the required packages
+USER root
+# Installing BigQuery dirver to connect to GCP
+RUN pip install sqlalchemy-bigquery
+# Switching back to using the `superset` user
+USER superset
+```
+
+* build our custom docker image:
+```
+docker build -t local/superset . #we add a tag here to specify that the image we will use is different from the one we pulled earlier
+```
+
+Now we are ready to launch our image.
+
+
+4. launch the docker image
+
+```
+docker run -d -p 8000:8088 \
+-e "SUPERSET_SECRET_KEY=the key generated above" \
+--name superset local/superset
+```
+
+3. created the admin account
+```
+docker exec -it superset superset fab create-admin \
+--username admin \
+--firstname Superset \
+--lastname Admin \
+--email admin@superset.com \
+--password admin
+```
+
+4. migrate local db to the latest version 
+```
+docker exec -it superset superset db upgrade
+```
+
+5. load examples (this step is optional) 
+```
+docker exec -it superset superset load_examples
+```
+
+6. setup roles
+```
+docker exec -it superset superset init
+```
+
+and finaly, navigate to http://localhost:8080/login/ and take a look (u/p: [admin/admin])
+
+sources : 
+1. [running superset with docker image](https://hub.docker.com/r/apache/superset)
+2. [official doc](https://superset.apache.org/docs/intro)
