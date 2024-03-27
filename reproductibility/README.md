@@ -169,5 +169,6 @@ You can go the [official doc](https://superset.apache.org/docs/intro) to add a d
 To destroy everything:
 * stop airflow: ```ctrl+c``` in the terminal airflow is running;
 * stop superset and delete the image: ```docker stop superset;docker image rm local/superset```;
+* go into the folder production_setup and run: ```terraform destroy```
 * deactivate the virtuaenv: ```deactivate```
 * delete the folder: ```rm -rf capstone-drux```
