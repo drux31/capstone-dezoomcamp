@@ -16,3 +16,5 @@ The project is divided in five main parts:
 5. [reproductibility](https://github.com/drux31/capstone-dezoomcamp/tree/main/reproductibility)
 
 ## General architecture
+
+![General architecture](./images/Overall_architecture.gif)
