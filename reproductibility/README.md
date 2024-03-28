@@ -3,7 +3,8 @@
 Before you begin, make sure you meet the following prerequisite:
 * you have docker installed ;
 * you have a python version of at least 3.9 ;
-* you run on linux or on a virtual machine hosting linux.
+* you run on linux or on a virtual machine hosting linux ;
+* you have a google cloud account and has defined a service account (generated a json credential file).
 
 This can performed on windows but some adaptations might be required on your part.
 
