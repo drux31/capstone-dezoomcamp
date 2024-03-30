@@ -18,3 +18,23 @@ The project is divided in five main parts:
 ## General architecture
 
 ![General architecture](./images/Overall_architecture.gif)
+
+## Detailed stack
+* Cloud:
+    * platform: GCP (**BigQuery** and **Cloud storage**);
+    * IaC tool: **Terraform**.
+* Data ingestion (chosse either batch or stream):
+    * processing: **Batch**;
+    * workflow orchestration: **airflow**.
+* Data warehouse:
+    * local: **duckDB**;
+    * cloud: **BigQuery**;
+    * patitionning and clustering: no partition since the dataset is small.
+* Transformation:
+    * technology used: **dbt-core**;
+    * scheduling: **airflow**.
+* Dashboard:
+    * Technology: **Superset**;
+    * number of tiles: **6**
+* Reproductibility:
+    * instructions are detailled [here](https://github.com/drux31/capstone-dezoomcamp/tree/main/reproductibility).
